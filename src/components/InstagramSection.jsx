@@ -38,7 +38,7 @@ export default function InstagramSection() {
               <img src="/images/changing-rooms.jpg" alt="" className="w-full h-full object-cover" />
             </div>
             {/* Dark overlay */}
-            <div className="absolute inset-0 bg-dark-bg/80 backdrop-blur-sm" />
+            <div className="absolute inset-0 bg-dark-bg/95 md:bg-dark-bg/80 md:backdrop-blur-sm" />
 
             {/* Content */}
             <div className="relative z-10 py-16 md:py-20 px-8 text-center flex flex-col items-center gap-6">

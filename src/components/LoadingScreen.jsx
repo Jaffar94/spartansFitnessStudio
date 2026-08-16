@@ -4,12 +4,42 @@ export default function LoadingScreen() {
   const [phase, setPhase] = useState('loading'); // loading → fadeOut → done
 
   useEffect(() => {
-    // Show loader for 1.8s, then fade out over 0.6s
-    const timer = setTimeout(() => setPhase('fadeOut'), 1800);
-    const removeTimer = setTimeout(() => setPhase('done'), 2400);
+    let isMounted = true;
+
+    // List of heavy background images to preload
+    const imagesToPreload = [
+      '/images/logo.png',
+      '/images/strength-area.jpg',
+      '/images/gym-floor.jpg',
+      '/images/cardio-area.jpg',
+      '/images/changing-rooms.jpg'
+    ];
+
+    // Enforce a minimum load time of 1.2s so the animation doesn't flash too fast
+    const minLoadTime = new Promise((resolve) => setTimeout(resolve, 1200));
+
+    // Create promises for all images
+    const imagePromises = imagesToPreload.map((src) => {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.src = src;
+        img.onload = resolve;
+        img.onerror = resolve; // If it fails, resolve anyway so it doesn't hang forever
+      });
+    });
+
+    // Wait for BOTH the minimum time AND all images to finish loading
+    Promise.all([...imagePromises, minLoadTime]).then(() => {
+      if (isMounted) {
+        setPhase('fadeOut');
+        setTimeout(() => {
+          if (isMounted) setPhase('done');
+        }, 600);
+      }
+    });
+
     return () => {
-      clearTimeout(timer);
-      clearTimeout(removeTimer);
+      isMounted = false;
     };
   }, []);
 
