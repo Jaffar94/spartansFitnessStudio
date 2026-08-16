@@ -50,15 +50,8 @@ export default function ScrollReveal({
   className = '',
   ...props
 }) {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    // Disable animations on mobile (< 768px) to prevent blank sections from delayed observer triggers
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile(); // Check immediately
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  // Initialize synchronously since this is client-side only
+  const [isMobile] = useState(() => window.innerWidth < 768);
 
   const { ref, isVisible } = useScrollReveal(props);
 
