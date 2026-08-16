@@ -273,13 +273,8 @@
     display: block;
   }
 
-  /* Force scroll reveal elements to be visible instantly on mobile */
-  @media (max-width: 768px) {
-    .scroll-reveal-wrapper {
-      opacity: 1 !important;
-      transform: none !important;
-      transition: none !important;
-    }
+  .map-container iframe {
+    display: block;
   }
 }
 
