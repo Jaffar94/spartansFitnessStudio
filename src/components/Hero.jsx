@@ -65,7 +65,7 @@ export default function Hero() {
         <div className="fade-in-up delay-400 mt-16 grid grid-cols-3 gap-2 sm:gap-4 max-w-xl mx-auto">
           {[
             { value: '5 AM', label: 'Early Doors' },
-            { value: '6 Days', label: 'Mon–Sat' },
+            { value: '7 Days', label: 'Mon–Sun' },
             { value: '100+', label: 'Members' },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
