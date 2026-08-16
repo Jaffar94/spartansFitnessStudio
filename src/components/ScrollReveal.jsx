@@ -50,6 +50,16 @@ export default function ScrollReveal({
   className = '',
   ...props
 }) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Disable animations on mobile (< 768px) to prevent blank sections from delayed observer triggers
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile(); // Check immediately
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const { ref, isVisible } = useScrollReveal(props);
 
   const transforms = {
@@ -60,15 +70,18 @@ export default function ScrollReveal({
     none: 'none',
   };
 
+  // If it's a mobile device, or if the element is visible, show it.
+  const shouldShow = isMobile || isVisible;
+
   return (
     <div
       ref={ref}
       className={className}
       style={{
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translate(0, 0)' : transforms[direction],
-        transition: `opacity ${duration}ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform ${duration}ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
-        willChange: 'opacity, transform',
+        opacity: shouldShow ? 1 : 0,
+        transform: shouldShow ? 'translate(0, 0)' : transforms[direction],
+        transition: isMobile ? 'none' : `opacity ${duration}ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform ${duration}ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+        willChange: isMobile ? 'auto' : 'opacity, transform',
       }}
     >
       {children}
