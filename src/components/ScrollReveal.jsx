@@ -60,15 +60,19 @@ export default function ScrollReveal({
     none: 'none',
   };
 
+  // Evaluate on every render to guarantee it catches mobile/tablets immediately
+  const isMobileOrTablet = typeof window !== 'undefined' && window.innerWidth < 1024;
+  const shouldShow = isMobileOrTablet || isVisible;
+
   return (
     <div
       ref={ref}
-      className={`scroll-reveal-wrapper ${className}`}
+      className={className}
       style={{
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translate(0, 0)' : transforms[direction],
-        transition: `opacity ${duration}ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform ${duration}ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
-        willChange: 'opacity, transform',
+        opacity: shouldShow ? 1 : 0,
+        transform: shouldShow ? 'translate(0, 0)' : transforms[direction],
+        transition: isMobileOrTablet ? 'none' : `opacity ${duration}ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform ${duration}ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+        willChange: isMobileOrTablet ? 'auto' : 'opacity, transform',
       }}
     >
       {children}
