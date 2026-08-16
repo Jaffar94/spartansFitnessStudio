@@ -84,7 +84,7 @@ export default function Navbar() {
 
         }`}
       >
-        <div className="px-6 py-4 bg-[rgba(5,5,5,0.95)] backdrop-blur-xl border-t border-[rgba(255,255,255,0.06)]">
+        <div className="px-6 py-4 bg-[#0a0a0a] border-t border-[rgba(255,255,255,0.06)]">
           {navLinks.map((link) => (
             <a
               key={link.href}

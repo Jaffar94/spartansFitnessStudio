@@ -6,11 +6,11 @@ const WHATSAPP_URL =
 export default function Hero() {
   return (
     <section id="hero" className="hero-gradient relative min-h-[100svh] flex items-center justify-center overflow-hidden">
-      {/* Animated background particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-72 h-72 md:w-[500px] md:h-[500px] rounded-full bg-spartan-green/[0.03] blur-[60px] md:blur-[120px] md:animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 md:w-[400px] md:h-[400px] rounded-full bg-spartan-green/[0.02] blur-[50px] md:blur-[100px] md:animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 md:w-[600px] md:h-[600px] rounded-full bg-spartan-green/[0.015] blur-[80px] md:blur-[150px]" />
+      {/* Animated background particles - disabled on mobile to save GPU */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block">
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-spartan-green/[0.03] blur-[120px] animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-spartan-green/[0.02] blur-[100px] animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-spartan-green/[0.015] blur-[150px]" />
       </div>
 
       {/* Grid pattern overlay */}

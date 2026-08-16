@@ -17,8 +17,8 @@ const testimonials = [
 export default function Testimonials() {
   return (
     <section id="reviews" className="relative py-24 md:py-32">
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] md:w-[800px] h-[300px] md:h-[400px] rounded-full bg-spartan-green/[0.02] blur-[80px] md:blur-[150px] pointer-events-none" />
+      {/* Large background glow - disabled on mobile for performance */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full bg-spartan-green/[0.02] blur-[150px] pointer-events-none hidden md:block" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         {/* Section header */}

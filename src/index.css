@@ -289,6 +289,9 @@
     transition: none !important;
     will-change: auto !important;
   }
+  .whatsapp-float {
+    animation: none !important;
+  }
 }
 
 /* ===== Keyframes (must be outside layers) ===== */
