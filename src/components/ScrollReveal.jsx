@@ -50,9 +50,6 @@ export default function ScrollReveal({
   className = '',
   ...props
 }) {
-  // Initialize synchronously since this is client-side only
-  const [isMobile] = useState(() => window.innerWidth < 768);
-
   const { ref, isVisible } = useScrollReveal(props);
 
   const transforms = {
@@ -63,18 +60,15 @@ export default function ScrollReveal({
     none: 'none',
   };
 
-  // If it's a mobile device, or if the element is visible, show it.
-  const shouldShow = isMobile || isVisible;
-
   return (
     <div
       ref={ref}
-      className={className}
+      className={`scroll-reveal-wrapper ${className}`}
       style={{
-        opacity: shouldShow ? 1 : 0,
-        transform: shouldShow ? 'translate(0, 0)' : transforms[direction],
-        transition: isMobile ? 'none' : `opacity ${duration}ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform ${duration}ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
-        willChange: isMobile ? 'auto' : 'opacity, transform',
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'translate(0, 0)' : transforms[direction],
+        transition: `opacity ${duration}ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform ${duration}ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+        willChange: 'opacity, transform',
       }}
     >
       {children}
