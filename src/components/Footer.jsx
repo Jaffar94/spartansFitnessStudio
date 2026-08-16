@@ -8,7 +8,7 @@ const MAP_SRC =
 
 export default function Footer() {
   return (
-    <footer id="contact" className="relative pt-24 md:pt-32 pb-8">
+    <footer id="contact" className="relative pt-24 md:pt-32 pb-8 overflow-hidden">
       {/* Subtle top divider */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[2px] bg-gradient-to-r from-transparent via-spartan-green/20 to-transparent" />
 

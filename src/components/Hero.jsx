@@ -5,7 +5,7 @@ const WHATSAPP_URL =
 
 export default function Hero() {
   return (
-    <section id="hero" className="hero-gradient relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="hero" className="hero-gradient relative min-h-[100svh] flex items-center justify-center overflow-hidden">
       {/* Animated background particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-72 h-72 md:w-[500px] md:h-[500px] rounded-full bg-spartan-green/[0.03] blur-[60px] md:blur-[120px] md:animate-pulse" />

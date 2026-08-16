@@ -12,7 +12,7 @@ export default function App() {
   return (
     <>
       <LoadingScreen />
-      <div className="overflow-x-hidden w-full relative">
+      <div>
         <Navbar />
         <main>
           <Hero />
