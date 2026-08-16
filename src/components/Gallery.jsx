@@ -34,7 +34,6 @@ export default function Gallery() {
                 <img
                   src={image.src}
                   alt={image.alt}
-                  loading="lazy"
                   className="w-full h-full object-cover"
                 />
                 {/* Overlay label on hover */}
