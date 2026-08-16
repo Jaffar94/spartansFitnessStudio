@@ -37,11 +37,7 @@ export function useScrollReveal(options = {}) {
   return { ref, isVisible };
 }
 
-/**
- * Wrapper component that animates children on scroll.
- * Supports multiple animation directions.
- */
-export default function ScrollReveal({
+function ScrollRevealAnimated({
   children,
   direction = 'up',
   delay = 0,
@@ -63,7 +59,7 @@ export default function ScrollReveal({
   return (
     <div
       ref={ref}
-      className={`force-show-mobile ${className}`}
+      className={className}
       style={{
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? 'translate(0, 0)' : transforms[direction],
@@ -74,4 +70,20 @@ export default function ScrollReveal({
       {children}
     </div>
   );
+}
+
+export default function ScrollReveal(props) {
+  // Check once on mount. If mobile/tablet, we completely skip rendering the observer.
+  const [isMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 1024);
+
+  if (isMobile) {
+    // Render completely bare naked children on mobile (or a simple div if className was passed)
+    // No IntersectionObservers, no inline styles, no lag.
+    if (props.className) {
+      return <div className={props.className}>{props.children}</div>;
+    }
+    return <>{props.children}</>;
+  }
+
+  return <ScrollRevealAnimated {...props} />;
 }
